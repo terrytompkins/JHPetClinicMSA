@@ -33,7 +33,7 @@ application {
     serverPort 8081
     skipUserManagement true
   }
-  entities Vet, Specialty
+  entities Vet, Specialty, Visit
 }
 
 application {
@@ -52,22 +52,29 @@ application {
     serverPort 8082
     skipUserManagement true
   }
-  entities Pet, Species, Owner
+  entities Pet, Species, Owner, Visit
 }
 
 /* Entities for Visit Gateway */
+entity Visit(visits) {
+    visitDate LocalDate required
+    petId Long required
+    vetId Long required
+    description String
+}
 
+service Visit with serviceImpl
+paginate Visit with pagination
+
+
+/* Entities for Pet Microservice */
 entity Species(species) {
     name String required maxlength(80)
 }
 
-entity Specialty(specialties) {
-    name String required maxlength(80)
-}
-
-entity Vet(vets) {
-    firstName String required maxlength(30)
-    lastName String required maxlength(30)
+entity Pet(pets) {
+    name String required maxlength(30)
+    birthDate LocalDate
 }
 
 entity Owner(owners) {
@@ -78,38 +85,35 @@ entity Owner(owners) {
     telephone String required maxlength(20)
 }
 
-entity Pet(pets) {
-    name String required maxlength(30)
-    birthDate LocalDate
-}
-
-entity Visit(visits) {
-    visitDate LocalDate
-    description String required maxlength(255)
-}
-
-// --- Relationships ----------------------------------------------
 relationship OneToMany {
   Owner{pets(name)} to Pet{owner(lastName)}
-  Pet{visits} to Visit{pet(name)}
 }
 
 relationship ManyToOne {
-  Pet{type(name)} to Species
+  Pet{species(name)} to Species
+}
+
+service Species, Pet, Owner with serviceImpl
+paginate Species, Pet, Owner with pagination
+microservice Species, Pet, Owner with pet
+
+
+
+
+/* Entities for Vet Microservice */
+entity Specialty(specialties) {
+    name String required maxlength(80)
+}
+
+entity Vet(vets) {
+    firstName String required maxlength(30)
+    lastName String required maxlength(30)
 }
 
 relationship ManyToMany{
     Vet{specialties(name)} to Specialty{vets}
 }
 
-// --- Application options ----------------------------------------
-
-// Set pagination options
-paginate Species, Specialty, Vet, Owner, Pet, Visit with pagination
-// We will use DTO's and not expose domain classes directly
-dto * with mapstruct
-
-// Set service options to all except few
-service all with serviceImpl
-
-filter Vet, Owner, Pet, Visit
+service Vet, Specialty with serviceImpl
+paginate Vet, Specialty with pagination
+microservice Vet, Specialty with pet
