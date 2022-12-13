@@ -1,0 +1,115 @@
+
+/*
+ * This is a microservice PetClinic sample with Gateway and two microservice applications
+ * This uses JHipster registry for service discovery
+ */
+ 
+application {
+  config {
+    baseName visits
+    applicationType gateway
+    packageName com.jhipster.demo.visits
+    serviceDiscoveryType eureka
+    authenticationType jwt
+    prodDatabaseType mysql
+    cacheProvider no
+    buildTool maven
+    clientFramework react
+    testFrameworks [cypress]
+    reactive false
+  }
+  entities *
+}
+
+application {
+  config {
+    baseName vet
+    applicationType microservice
+    packageName com.jhipster.demo.vet
+    serviceDiscoveryType eureka
+    authenticationType jwt
+    prodDatabaseType mysql
+    buildTool maven
+    serverPort 8081
+    skipUserManagement true
+  }
+  entities Vet, Specialty
+}
+
+application {
+  config {
+    baseName pet
+    applicationType microservice
+    packageName com.jhipster.demo.pet
+    serviceDiscoveryType eureka
+    authenticationType jwt
+    databaseType mongodb
+    prodDatabaseType mongodb
+    devDatabaseType mongodb
+    cacheProvider no
+    enableHibernateCache false
+    buildTool maven
+    serverPort 8082
+    skipUserManagement true
+  }
+  entities Pet, Species, Owner
+}
+
+/* Entities for Visit Gateway */
+
+entity Species(species) {
+    name String required maxlength(80)
+}
+
+entity Specialty(specialties) {
+    name String required maxlength(80)
+}
+
+entity Vet(vets) {
+    firstName String required maxlength(30)
+    lastName String required maxlength(30)
+}
+
+entity Owner(owners) {
+    firstName String required maxlength(30)
+    lastName String required maxlength(30)
+    address String required maxlength(255)
+    city String required maxlength(80)
+    telephone String required maxlength(20)
+}
+
+entity Pet(pets) {
+    name String required maxlength(30)
+    birthDate LocalDate
+}
+
+entity Visit(visits) {
+    visitDate LocalDate
+    description String required maxlength(255)
+}
+
+// --- Relationships ----------------------------------------------
+relationship OneToMany {
+  Owner{pets(name)} to Pet{owner(lastName)}
+  Pet{visits} to Visit{pet(name)}
+}
+
+relationship ManyToOne {
+  Pet{type(name)} to Species
+}
+
+relationship ManyToMany{
+    Vet{specialties(name)} to Specialty{vets}
+}
+
+// --- Application options ----------------------------------------
+
+// Set pagination options
+paginate Species, Specialty, Vet, Owner, Pet, Visit with pagination
+// We will use DTO's and not expose domain classes directly
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+filter Vet, Owner, Pet, Visit
