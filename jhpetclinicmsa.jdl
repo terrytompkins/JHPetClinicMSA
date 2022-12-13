@@ -43,11 +43,8 @@ application {
     packageName com.jhipster.demo.pet
     serviceDiscoveryType eureka
     authenticationType jwt
-    databaseType mongodb
-    prodDatabaseType mongodb
-    devDatabaseType mongodb
+    prodDatabaseType mysql
     cacheProvider no
-    enableHibernateCache false
     buildTool maven
     serverPort 8082
     skipUserManagement true
