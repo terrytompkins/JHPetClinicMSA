@@ -11,10 +11,7 @@ application {
     packageName com.jhipster.demo.visits
     serviceDiscoveryType eureka
     authenticationType jwt
-    databaseType sql
     prodDatabaseType mysql
-    devDatabaseType h2Disk
-    cacheProvider no
     buildTool maven
     clientFramework react
     testFrameworks [cypress]
@@ -30,9 +27,7 @@ application {
     packageName com.jhipster.demo.vet
     serviceDiscoveryType eureka
     authenticationType jwt
-    databaseType sql
     prodDatabaseType mysql
-    devDatabaseType h2Disk
     buildTool maven
     serverPort 8081
     skipUserManagement true
@@ -47,10 +42,7 @@ application {
     packageName com.jhipster.demo.pet
     serviceDiscoveryType eureka
     authenticationType jwt
-    databaseType sql
     prodDatabaseType mysql
-    devDatabaseType h2Disk
-    cacheProvider no
     buildTool maven
     serverPort 8082
     skipUserManagement true
@@ -60,8 +52,8 @@ application {
 
 /* Entities for Visit Gateway */
 entity Visit(visits) {
-    start ZonedDateTime required
-    end ZonedDateTime required
+    startTime ZonedDateTime required
+    endTime ZonedDateTime required
     petId Long required
     vetId Long required
     description String

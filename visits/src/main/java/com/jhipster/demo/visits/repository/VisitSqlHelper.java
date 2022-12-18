@@ -11,8 +11,8 @@ public class VisitSqlHelper {
     public static List<Expression> getColumns(Table table, String columnPrefix) {
         List<Expression> columns = new ArrayList<>();
         columns.add(Column.aliased("id", table, columnPrefix + "_id"));
-        columns.add(Column.aliased("start", table, columnPrefix + "_start"));
-        columns.add(Column.aliased("end", table, columnPrefix + "_end"));
+        columns.add(Column.aliased("start_time", table, columnPrefix + "_start_time"));
+        columns.add(Column.aliased("end_time", table, columnPrefix + "_end_time"));
         columns.add(Column.aliased("pet_id", table, columnPrefix + "_pet_id"));
         columns.add(Column.aliased("vet_id", table, columnPrefix + "_vet_id"));
         columns.add(Column.aliased("description", table, columnPrefix + "_description"));

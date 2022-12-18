@@ -45,11 +45,11 @@ public class VisitServiceImpl implements VisitService {
         return visitRepository
             .findById(visit.getId())
             .map(existingVisit -> {
-                if (visit.getStart() != null) {
-                    existingVisit.setStart(visit.getStart());
+                if (visit.getStartTime() != null) {
+                    existingVisit.setStartTime(visit.getStartTime());
                 }
-                if (visit.getEnd() != null) {
-                    existingVisit.setEnd(visit.getEnd());
+                if (visit.getEndTime() != null) {
+                    existingVisit.setEndTime(visit.getEndTime());
                 }
                 if (visit.getPetId() != null) {
                     existingVisit.setPetId(visit.getPetId());

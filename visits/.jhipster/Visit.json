@@ -1,18 +1,18 @@
 {
   "applications": ["visits"],
-  "changelogDate": "20221213171253",
+  "changelogDate": "20221218184031",
   "databaseType": "sql",
   "dto": "no",
   "embedded": false,
   "entityTableName": "visits",
   "fields": [
     {
-      "fieldName": "start",
+      "fieldName": "startTime",
       "fieldType": "ZonedDateTime",
       "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "end",
+      "fieldName": "endTime",
       "fieldType": "ZonedDateTime",
       "fieldValidateRules": ["required"]
     },

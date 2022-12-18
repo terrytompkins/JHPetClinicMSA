@@ -8,11 +8,11 @@
       "entities": {
         "main": "Entities",
         "petSpecies": "Species",
-        "petPet": "Pet",
-        "petSpecialty": "Specialty",
         "visit": "Visit",
-        "petVet": "Vet",
         "petOwner": "Owner",
+        "petSpecialty": "Specialty",
+        "petPet": "Pet",
+        "petVet": "Vet",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

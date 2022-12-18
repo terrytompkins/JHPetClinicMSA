@@ -2,8 +2,8 @@ import dayjs from 'dayjs';
 
 export interface IVisit {
   id?: number;
-  start?: string;
-  end?: string;
+  startTime?: string;
+  endTime?: string;
   petId?: number;
   vetId?: number;
   description?: string | null;

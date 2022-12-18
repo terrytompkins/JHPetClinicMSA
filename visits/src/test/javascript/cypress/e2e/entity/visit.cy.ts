@@ -15,7 +15,7 @@ describe('Visit e2e test', () => {
   const visitPageUrlPattern = new RegExp('/visit(\\?.*)?$');
   const username = Cypress.env('E2E_USERNAME') ?? 'user';
   const password = Cypress.env('E2E_PASSWORD') ?? 'user';
-  const visitSample = { start: '2022-12-13T17:08:59.427Z', end: '2022-12-13T16:25:36.981Z', petId: 68587, vetId: 59788 };
+  const visitSample = { startTime: '2022-12-18T18:36:37.427Z', endTime: '2022-12-18T17:53:14.981Z', petId: 68587, vetId: 59788 };
 
   let visit;
 
@@ -159,9 +159,9 @@ describe('Visit e2e test', () => {
     });
 
     it('should create an instance of Visit', () => {
-      cy.get(`[data-cy="start"]`).type('2022-12-13T05:13').blur().should('have.value', '2022-12-13T05:13');
+      cy.get(`[data-cy="startTime"]`).type('2022-12-18T06:40').blur().should('have.value', '2022-12-18T06:40');
 
-      cy.get(`[data-cy="end"]`).type('2022-12-12T18:41').blur().should('have.value', '2022-12-12T18:41');
+      cy.get(`[data-cy="endTime"]`).type('2022-12-17T20:09').blur().should('have.value', '2022-12-17T20:09');
 
       cy.get(`[data-cy="petId"]`).type('69176').should('have.value', '69176');
 

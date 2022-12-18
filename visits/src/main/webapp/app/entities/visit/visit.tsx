@@ -52,10 +52,10 @@ export const Visit = () => {
                   <Translate contentKey="visitsApp.visit.id">ID</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="visitsApp.visit.start">Start</Translate>
+                  <Translate contentKey="visitsApp.visit.startTime">Start Time</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="visitsApp.visit.end">End</Translate>
+                  <Translate contentKey="visitsApp.visit.endTime">End Time</Translate>
                 </th>
                 <th>
                   <Translate contentKey="visitsApp.visit.petId">Pet Id</Translate>
@@ -77,8 +77,8 @@ export const Visit = () => {
                       {visit.id}
                     </Button>
                   </td>
-                  <td>{visit.start ? <TextFormat type="date" value={visit.start} format={APP_DATE_FORMAT} /> : null}</td>
-                  <td>{visit.end ? <TextFormat type="date" value={visit.end} format={APP_DATE_FORMAT} /> : null}</td>
+                  <td>{visit.startTime ? <TextFormat type="date" value={visit.startTime} format={APP_DATE_FORMAT} /> : null}</td>
+                  <td>{visit.endTime ? <TextFormat type="date" value={visit.endTime} format={APP_DATE_FORMAT} /> : null}</td>
                   <td>{visit.petId}</td>
                   <td>{visit.vetId}</td>
                   <td>{visit.description}</td>

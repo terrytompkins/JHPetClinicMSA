@@ -164,7 +164,7 @@ describe('Pet e2e test', () => {
     it('should create an instance of Pet', () => {
       cy.get(`[data-cy="name"]`).type('coherent empower').should('have.value', 'coherent empower');
 
-      cy.get(`[data-cy="birthDate"]`).type('2022-12-13').blur().should('have.value', '2022-12-13');
+      cy.get(`[data-cy="birthDate"]`).type('2022-12-18').blur().should('have.value', '2022-12-18');
 
       cy.get(entityCreateSaveButtonSelector).click();
 

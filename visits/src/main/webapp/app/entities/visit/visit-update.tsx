@@ -43,8 +43,8 @@ export const VisitUpdate = () => {
   }, [updateSuccess]);
 
   const saveEntity = values => {
-    values.start = convertDateTimeToServer(values.start);
-    values.end = convertDateTimeToServer(values.end);
+    values.startTime = convertDateTimeToServer(values.startTime);
+    values.endTime = convertDateTimeToServer(values.endTime);
 
     const entity = {
       ...visitEntity,
@@ -61,13 +61,13 @@ export const VisitUpdate = () => {
   const defaultValues = () =>
     isNew
       ? {
-          start: displayDefaultDateTime(),
-          end: displayDefaultDateTime(),
+          startTime: displayDefaultDateTime(),
+          endTime: displayDefaultDateTime(),
         }
       : {
           ...visitEntity,
-          start: convertDateTimeFromServer(visitEntity.start),
-          end: convertDateTimeFromServer(visitEntity.end),
+          startTime: convertDateTimeFromServer(visitEntity.startTime),
+          endTime: convertDateTimeFromServer(visitEntity.endTime),
         };
 
   return (
@@ -96,10 +96,10 @@ export const VisitUpdate = () => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('visitsApp.visit.start')}
-                id="visit-start"
-                name="start"
-                data-cy="start"
+                label={translate('visitsApp.visit.startTime')}
+                id="visit-startTime"
+                name="startTime"
+                data-cy="startTime"
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
                 validate={{
@@ -107,10 +107,10 @@ export const VisitUpdate = () => {
                 }}
               />
               <ValidatedField
-                label={translate('visitsApp.visit.end')}
-                id="visit-end"
-                name="end"
-                data-cy="end"
+                label={translate('visitsApp.visit.endTime')}
+                id="visit-endTime"
+                name="endTime"
+                data-cy="endTime"
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
                 validate={{

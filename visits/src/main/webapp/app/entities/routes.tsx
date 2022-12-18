@@ -10,11 +10,11 @@ import getStore from 'app/config/store';
 import entitiesReducers from './reducers';
 
 import Species from './pet/species';
-import Pet from './pet/pet';
-import Specialty from './pet/specialty';
 import Visit from './visit';
-import Vet from './pet/vet';
 import Owner from './pet/owner';
+import Specialty from './pet/specialty';
+import Pet from './pet/pet';
+import Vet from './pet/vet';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 export default () => {
@@ -25,11 +25,11 @@ export default () => {
       <ErrorBoundaryRoutes>
         {/* prettier-ignore */}
         <Route path="species/*" element={<Species />} />
-        <Route path="pet/*" element={<Pet />} />
-        <Route path="specialty/*" element={<Specialty />} />
         <Route path="visit/*" element={<Visit />} />
-        <Route path="vet/*" element={<Vet />} />
         <Route path="owner/*" element={<Owner />} />
+        <Route path="specialty/*" element={<Specialty />} />
+        <Route path="pet/*" element={<Pet />} />
+        <Route path="vet/*" element={<Vet />} />
         {/* jhipster-needle-add-route-path - JHipster will add routes here */}
       </ErrorBoundaryRoutes>
     </div>

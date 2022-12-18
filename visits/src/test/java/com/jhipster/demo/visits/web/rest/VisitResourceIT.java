@@ -34,11 +34,11 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 @WithMockUser
 class VisitResourceIT {
 
-    private static final ZonedDateTime DEFAULT_START = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_START = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final ZonedDateTime DEFAULT_START_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_START_TIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
-    private static final ZonedDateTime DEFAULT_END = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_END = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final ZonedDateTime DEFAULT_END_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_END_TIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
     private static final Long DEFAULT_PET_ID = 1L;
     private static final Long UPDATED_PET_ID = 2L;
@@ -74,8 +74,8 @@ class VisitResourceIT {
      */
     public static Visit createEntity(EntityManager em) {
         Visit visit = new Visit()
-            .start(DEFAULT_START)
-            .end(DEFAULT_END)
+            .startTime(DEFAULT_START_TIME)
+            .endTime(DEFAULT_END_TIME)
             .petId(DEFAULT_PET_ID)
             .vetId(DEFAULT_VET_ID)
             .description(DEFAULT_DESCRIPTION);
@@ -90,8 +90,8 @@ class VisitResourceIT {
      */
     public static Visit createUpdatedEntity(EntityManager em) {
         Visit visit = new Visit()
-            .start(UPDATED_START)
-            .end(UPDATED_END)
+            .startTime(UPDATED_START_TIME)
+            .endTime(UPDATED_END_TIME)
             .petId(UPDATED_PET_ID)
             .vetId(UPDATED_VET_ID)
             .description(UPDATED_DESCRIPTION);
@@ -134,8 +134,8 @@ class VisitResourceIT {
         List<Visit> visitList = visitRepository.findAll().collectList().block();
         assertThat(visitList).hasSize(databaseSizeBeforeCreate + 1);
         Visit testVisit = visitList.get(visitList.size() - 1);
-        assertThat(testVisit.getStart()).isEqualTo(DEFAULT_START);
-        assertThat(testVisit.getEnd()).isEqualTo(DEFAULT_END);
+        assertThat(testVisit.getStartTime()).isEqualTo(DEFAULT_START_TIME);
+        assertThat(testVisit.getEndTime()).isEqualTo(DEFAULT_END_TIME);
         assertThat(testVisit.getPetId()).isEqualTo(DEFAULT_PET_ID);
         assertThat(testVisit.getVetId()).isEqualTo(DEFAULT_VET_ID);
         assertThat(testVisit.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
@@ -164,10 +164,10 @@ class VisitResourceIT {
     }
 
     @Test
-    void checkStartIsRequired() throws Exception {
+    void checkStartTimeIsRequired() throws Exception {
         int databaseSizeBeforeTest = visitRepository.findAll().collectList().block().size();
         // set the field null
-        visit.setStart(null);
+        visit.setStartTime(null);
 
         // Create the Visit, which fails.
 
@@ -185,10 +185,10 @@ class VisitResourceIT {
     }
 
     @Test
-    void checkEndIsRequired() throws Exception {
+    void checkEndTimeIsRequired() throws Exception {
         int databaseSizeBeforeTest = visitRepository.findAll().collectList().block().size();
         // set the field null
-        visit.setEnd(null);
+        visit.setEndTime(null);
 
         // Create the Visit, which fails.
 
@@ -270,8 +270,8 @@ class VisitResourceIT {
         assertThat(visitList).isNotNull();
         assertThat(visitList).hasSize(1);
         Visit testVisit = visitList.get(0);
-        assertThat(testVisit.getStart()).isEqualTo(DEFAULT_START);
-        assertThat(testVisit.getEnd()).isEqualTo(DEFAULT_END);
+        assertThat(testVisit.getStartTime()).isEqualTo(DEFAULT_START_TIME);
+        assertThat(testVisit.getEndTime()).isEqualTo(DEFAULT_END_TIME);
         assertThat(testVisit.getPetId()).isEqualTo(DEFAULT_PET_ID);
         assertThat(testVisit.getVetId()).isEqualTo(DEFAULT_VET_ID);
         assertThat(testVisit.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
@@ -295,10 +295,10 @@ class VisitResourceIT {
             .expectBody()
             .jsonPath("$.[*].id")
             .value(hasItem(visit.getId().intValue()))
-            .jsonPath("$.[*].start")
-            .value(hasItem(sameInstant(DEFAULT_START)))
-            .jsonPath("$.[*].end")
-            .value(hasItem(sameInstant(DEFAULT_END)))
+            .jsonPath("$.[*].startTime")
+            .value(hasItem(sameInstant(DEFAULT_START_TIME)))
+            .jsonPath("$.[*].endTime")
+            .value(hasItem(sameInstant(DEFAULT_END_TIME)))
             .jsonPath("$.[*].petId")
             .value(hasItem(DEFAULT_PET_ID.intValue()))
             .jsonPath("$.[*].vetId")
@@ -325,10 +325,10 @@ class VisitResourceIT {
             .expectBody()
             .jsonPath("$.id")
             .value(is(visit.getId().intValue()))
-            .jsonPath("$.start")
-            .value(is(sameInstant(DEFAULT_START)))
-            .jsonPath("$.end")
-            .value(is(sameInstant(DEFAULT_END)))
+            .jsonPath("$.startTime")
+            .value(is(sameInstant(DEFAULT_START_TIME)))
+            .jsonPath("$.endTime")
+            .value(is(sameInstant(DEFAULT_END_TIME)))
             .jsonPath("$.petId")
             .value(is(DEFAULT_PET_ID.intValue()))
             .jsonPath("$.vetId")
@@ -358,7 +358,12 @@ class VisitResourceIT {
 
         // Update the visit
         Visit updatedVisit = visitRepository.findById(visit.getId()).block();
-        updatedVisit.start(UPDATED_START).end(UPDATED_END).petId(UPDATED_PET_ID).vetId(UPDATED_VET_ID).description(UPDATED_DESCRIPTION);
+        updatedVisit
+            .startTime(UPDATED_START_TIME)
+            .endTime(UPDATED_END_TIME)
+            .petId(UPDATED_PET_ID)
+            .vetId(UPDATED_VET_ID)
+            .description(UPDATED_DESCRIPTION);
 
         webTestClient
             .put()
@@ -373,8 +378,8 @@ class VisitResourceIT {
         List<Visit> visitList = visitRepository.findAll().collectList().block();
         assertThat(visitList).hasSize(databaseSizeBeforeUpdate);
         Visit testVisit = visitList.get(visitList.size() - 1);
-        assertThat(testVisit.getStart()).isEqualTo(UPDATED_START);
-        assertThat(testVisit.getEnd()).isEqualTo(UPDATED_END);
+        assertThat(testVisit.getStartTime()).isEqualTo(UPDATED_START_TIME);
+        assertThat(testVisit.getEndTime()).isEqualTo(UPDATED_END_TIME);
         assertThat(testVisit.getPetId()).isEqualTo(UPDATED_PET_ID);
         assertThat(testVisit.getVetId()).isEqualTo(UPDATED_VET_ID);
         assertThat(testVisit.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
@@ -451,7 +456,7 @@ class VisitResourceIT {
         Visit partialUpdatedVisit = new Visit();
         partialUpdatedVisit.setId(visit.getId());
 
-        partialUpdatedVisit.end(UPDATED_END).petId(UPDATED_PET_ID);
+        partialUpdatedVisit.endTime(UPDATED_END_TIME).petId(UPDATED_PET_ID);
 
         webTestClient
             .patch()
@@ -466,8 +471,8 @@ class VisitResourceIT {
         List<Visit> visitList = visitRepository.findAll().collectList().block();
         assertThat(visitList).hasSize(databaseSizeBeforeUpdate);
         Visit testVisit = visitList.get(visitList.size() - 1);
-        assertThat(testVisit.getStart()).isEqualTo(DEFAULT_START);
-        assertThat(testVisit.getEnd()).isEqualTo(UPDATED_END);
+        assertThat(testVisit.getStartTime()).isEqualTo(DEFAULT_START_TIME);
+        assertThat(testVisit.getEndTime()).isEqualTo(UPDATED_END_TIME);
         assertThat(testVisit.getPetId()).isEqualTo(UPDATED_PET_ID);
         assertThat(testVisit.getVetId()).isEqualTo(DEFAULT_VET_ID);
         assertThat(testVisit.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
@@ -485,8 +490,8 @@ class VisitResourceIT {
         partialUpdatedVisit.setId(visit.getId());
 
         partialUpdatedVisit
-            .start(UPDATED_START)
-            .end(UPDATED_END)
+            .startTime(UPDATED_START_TIME)
+            .endTime(UPDATED_END_TIME)
             .petId(UPDATED_PET_ID)
             .vetId(UPDATED_VET_ID)
             .description(UPDATED_DESCRIPTION);
@@ -504,8 +509,8 @@ class VisitResourceIT {
         List<Visit> visitList = visitRepository.findAll().collectList().block();
         assertThat(visitList).hasSize(databaseSizeBeforeUpdate);
         Visit testVisit = visitList.get(visitList.size() - 1);
-        assertThat(testVisit.getStart()).isEqualTo(UPDATED_START);
-        assertThat(testVisit.getEnd()).isEqualTo(UPDATED_END);
+        assertThat(testVisit.getStartTime()).isEqualTo(UPDATED_START_TIME);
+        assertThat(testVisit.getEndTime()).isEqualTo(UPDATED_END_TIME);
         assertThat(testVisit.getPetId()).isEqualTo(UPDATED_PET_ID);
         assertThat(testVisit.getVetId()).isEqualTo(UPDATED_VET_ID);
         assertThat(testVisit.getDescription()).isEqualTo(UPDATED_DESCRIPTION);

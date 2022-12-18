@@ -22,12 +22,12 @@ public class Visit implements Serializable {
     private Long id;
 
     @NotNull(message = "must not be null")
-    @Column("start")
-    private ZonedDateTime start;
+    @Column("start_time")
+    private ZonedDateTime startTime;
 
     @NotNull(message = "must not be null")
-    @Column("end")
-    private ZonedDateTime end;
+    @Column("end_time")
+    private ZonedDateTime endTime;
 
     @NotNull(message = "must not be null")
     @Column("pet_id")
@@ -55,30 +55,30 @@ public class Visit implements Serializable {
         this.id = id;
     }
 
-    public ZonedDateTime getStart() {
-        return this.start;
+    public ZonedDateTime getStartTime() {
+        return this.startTime;
     }
 
-    public Visit start(ZonedDateTime start) {
-        this.setStart(start);
+    public Visit startTime(ZonedDateTime startTime) {
+        this.setStartTime(startTime);
         return this;
     }
 
-    public void setStart(ZonedDateTime start) {
-        this.start = start;
+    public void setStartTime(ZonedDateTime startTime) {
+        this.startTime = startTime;
     }
 
-    public ZonedDateTime getEnd() {
-        return this.end;
+    public ZonedDateTime getEndTime() {
+        return this.endTime;
     }
 
-    public Visit end(ZonedDateTime end) {
-        this.setEnd(end);
+    public Visit endTime(ZonedDateTime endTime) {
+        this.setEndTime(endTime);
         return this;
     }
 
-    public void setEnd(ZonedDateTime end) {
-        this.end = end;
+    public void setEndTime(ZonedDateTime endTime) {
+        this.endTime = endTime;
     }
 
     public Long getPetId() {
@@ -144,8 +144,8 @@ public class Visit implements Serializable {
     public String toString() {
         return "Visit{" +
             "id=" + getId() +
-            ", start='" + getStart() + "'" +
-            ", end='" + getEnd() + "'" +
+            ", startTime='" + getStartTime() + "'" +
+            ", endTime='" + getEndTime() + "'" +
             ", petId=" + getPetId() +
             ", vetId=" + getVetId() +
             ", description='" + getDescription() + "'" +

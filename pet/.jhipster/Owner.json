@@ -1,6 +1,6 @@
 {
   "applications": ["visits", "pet"],
-  "changelogDate": "20221213171253",
+  "changelogDate": "20221218184031",
   "clientRootFolder": "pet",
   "databaseType": "sql",
   "dto": "no",
