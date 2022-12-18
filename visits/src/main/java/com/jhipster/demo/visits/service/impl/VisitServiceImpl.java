@@ -3,9 +3,9 @@ package com.jhipster.demo.visits.service.impl;
 import com.jhipster.demo.visits.domain.Visit;
 import com.jhipster.demo.visits.repository.VisitRepository;
 import com.jhipster.demo.visits.service.VisitService;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
@@ -45,8 +45,11 @@ public class VisitServiceImpl implements VisitService {
         return visitRepository
             .findById(visit.getId())
             .map(existingVisit -> {
-                if (visit.getVisitDate() != null) {
-                    existingVisit.setVisitDate(visit.getVisitDate());
+                if (visit.getStart() != null) {
+                    existingVisit.setStart(visit.getStart());
+                }
+                if (visit.getEnd() != null) {
+                    existingVisit.setEnd(visit.getEnd());
                 }
                 if (visit.getPetId() != null) {
                     existingVisit.setPetId(visit.getPetId());
@@ -65,9 +68,9 @@ public class VisitServiceImpl implements VisitService {
 
     @Override
     @Transactional(readOnly = true)
-    public Flux<Visit> findAll(Pageable pageable) {
+    public Flux<Visit> findAll() {
         log.debug("Request to get all Visits");
-        return visitRepository.findAllBy(pageable);
+        return visitRepository.findAll();
     }
 
     public Mono<Long> countAll() {

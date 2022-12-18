@@ -15,7 +15,7 @@ describe('Visit e2e test', () => {
   const visitPageUrlPattern = new RegExp('/visit(\\?.*)?$');
   const username = Cypress.env('E2E_USERNAME') ?? 'user';
   const password = Cypress.env('E2E_PASSWORD') ?? 'user';
-  const visitSample = { visitDate: '2022-12-13', petId: 3281, vetId: 68587 };
+  const visitSample = { start: '2022-12-13T17:08:59.427Z', end: '2022-12-13T16:25:36.981Z', petId: 68587, vetId: 59788 };
 
   let visit;
 
@@ -91,9 +91,6 @@ describe('Visit e2e test', () => {
             },
             {
               statusCode: 200,
-              headers: {
-                link: '<http://localhost/api/visits?page=0&size=20>; rel="last",<http://localhost/api/visits?page=0&size=20>; rel="first"',
-              },
               body: [visit],
             }
           ).as('entitiesRequestInternal');
@@ -162,13 +159,15 @@ describe('Visit e2e test', () => {
     });
 
     it('should create an instance of Visit', () => {
-      cy.get(`[data-cy="visitDate"]`).type('2022-12-13').blur().should('have.value', '2022-12-13');
+      cy.get(`[data-cy="start"]`).type('2022-12-13T05:13').blur().should('have.value', '2022-12-13T05:13');
 
-      cy.get(`[data-cy="petId"]`).type('93823').should('have.value', '93823');
+      cy.get(`[data-cy="end"]`).type('2022-12-12T18:41').blur().should('have.value', '2022-12-12T18:41');
 
-      cy.get(`[data-cy="vetId"]`).type('69176').should('have.value', '69176');
+      cy.get(`[data-cy="petId"]`).type('69176').should('have.value', '69176');
 
-      cy.get(`[data-cy="description"]`).type('Car Pakistan').should('have.value', 'Car Pakistan');
+      cy.get(`[data-cy="vetId"]`).type('65141').should('have.value', '65141');
+
+      cy.get(`[data-cy="description"]`).type('Chicken').should('have.value', 'Chicken');
 
       cy.get(entityCreateSaveButtonSelector).click();
 

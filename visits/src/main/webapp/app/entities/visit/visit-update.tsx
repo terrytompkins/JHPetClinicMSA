@@ -25,7 +25,7 @@ export const VisitUpdate = () => {
   const updateSuccess = useAppSelector(state => state.visits.visit.updateSuccess);
 
   const handleClose = () => {
-    navigate('/visit' + location.search);
+    navigate('/visit');
   };
 
   useEffect(() => {
@@ -43,6 +43,9 @@ export const VisitUpdate = () => {
   }, [updateSuccess]);
 
   const saveEntity = values => {
+    values.start = convertDateTimeToServer(values.start);
+    values.end = convertDateTimeToServer(values.end);
+
     const entity = {
       ...visitEntity,
       ...values,
@@ -57,9 +60,14 @@ export const VisitUpdate = () => {
 
   const defaultValues = () =>
     isNew
-      ? {}
+      ? {
+          start: displayDefaultDateTime(),
+          end: displayDefaultDateTime(),
+        }
       : {
           ...visitEntity,
+          start: convertDateTimeFromServer(visitEntity.start),
+          end: convertDateTimeFromServer(visitEntity.end),
         };
 
   return (
@@ -88,11 +96,23 @@ export const VisitUpdate = () => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('visitsApp.visit.visitDate')}
-                id="visit-visitDate"
-                name="visitDate"
-                data-cy="visitDate"
-                type="date"
+                label={translate('visitsApp.visit.start')}
+                id="visit-start"
+                name="start"
+                data-cy="start"
+                type="datetime-local"
+                placeholder="YYYY-MM-DD HH:mm"
+                validate={{
+                  required: { value: true, message: translate('entity.validation.required') },
+                }}
+              />
+              <ValidatedField
+                label={translate('visitsApp.visit.end')}
+                id="visit-end"
+                name="end"
+                data-cy="end"
+                type="datetime-local"
+                placeholder="YYYY-MM-DD HH:mm"
                 validate={{
                   required: { value: true, message: translate('entity.validation.required') },
                 }}

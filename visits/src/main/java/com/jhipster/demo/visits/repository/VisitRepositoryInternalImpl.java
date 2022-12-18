@@ -6,7 +6,7 @@ import com.jhipster.demo.visits.domain.Visit;
 import com.jhipster.demo.visits.repository.rowmapper.VisitRowMapper;
 import io.r2dbc.spi.Row;
 import io.r2dbc.spi.RowMetadata;
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

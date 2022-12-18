@@ -1,7 +1,7 @@
 package com.jhipster.demo.visits.service;
 
 import com.jhipster.demo.visits.domain.Visit;
-import org.springframework.data.domain.Pageable;
+import java.util.List;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -36,10 +36,9 @@ public interface VisitService {
     /**
      * Get all the visits.
      *
-     * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Flux<Visit> findAll(Pageable pageable);
+    Flux<Visit> findAll();
 
     /**
      * Returns the number of visits available.

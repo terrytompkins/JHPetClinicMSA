@@ -2,7 +2,7 @@ package com.jhipster.demo.visits.repository.rowmapper;
 
 import com.jhipster.demo.visits.domain.Visit;
 import io.r2dbc.spi.Row;
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.function.BiFunction;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +26,8 @@ public class VisitRowMapper implements BiFunction<Row, String, Visit> {
     public Visit apply(Row row, String prefix) {
         Visit entity = new Visit();
         entity.setId(converter.fromRow(row, prefix + "_id", Long.class));
-        entity.setVisitDate(converter.fromRow(row, prefix + "_visit_date", LocalDate.class));
+        entity.setStart(converter.fromRow(row, prefix + "_start", ZonedDateTime.class));
+        entity.setEnd(converter.fromRow(row, prefix + "_end", ZonedDateTime.class));
         entity.setPetId(converter.fromRow(row, prefix + "_pet_id", Long.class));
         entity.setVetId(converter.fromRow(row, prefix + "_vet_id", Long.class));
         entity.setDescription(converter.fromRow(row, prefix + "_description", String.class));

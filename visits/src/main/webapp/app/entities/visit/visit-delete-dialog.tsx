@@ -25,7 +25,7 @@ export const VisitDeleteDialog = () => {
   const updateSuccess = useAppSelector(state => state.visits.visit.updateSuccess);
 
   const handleClose = () => {
-    navigate('/visit' + location.search);
+    navigate('/visit');
   };
 
   useEffect(() => {

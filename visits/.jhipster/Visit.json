@@ -1,5 +1,5 @@
 {
-  "applications": ["visits", "vet", "pet"],
+  "applications": ["visits"],
   "changelogDate": "20221213171253",
   "databaseType": "sql",
   "dto": "no",
@@ -7,8 +7,13 @@
   "entityTableName": "visits",
   "fields": [
     {
-      "fieldName": "visitDate",
-      "fieldType": "LocalDate",
+      "fieldName": "start",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "end",
+      "fieldType": "ZonedDateTime",
       "fieldValidateRules": ["required"]
     },
     {
@@ -29,7 +34,7 @@
   "fluentMethods": true,
   "jpaMetamodelFiltering": false,
   "name": "Visit",
-  "pagination": "pagination",
+  "pagination": "no",
   "readOnly": false,
   "relationships": [],
   "service": "serviceImpl"

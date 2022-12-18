@@ -14,7 +14,10 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="visit_date" type="date">
+            <column name="start" type="${datetimeType}">
+                <constraints nullable="false" />
+            </column>
+            <column name="end" type="${datetimeType}">
                 <constraints nullable="false" />
             </column>
             <column name="pet_id" type="bigint">
@@ -28,6 +31,8 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
+        <dropDefaultValue tableName="visits" columnName="start" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="visits" columnName="end" columnDataType="${datetimeType}"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -47,7 +52,8 @@
                   tableName="visits"
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
-            <column name="visit_date" type="date"/>
+            <column name="start" type="date"/>
+            <column name="end" type="date"/>
             <column name="pet_id" type="numeric"/>
             <column name="vet_id" type="numeric"/>
             <column name="description" type="string"/>

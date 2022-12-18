@@ -1,7 +1,7 @@
 package com.jhipster.demo.visits.domain;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -22,8 +22,12 @@ public class Visit implements Serializable {
     private Long id;
 
     @NotNull(message = "must not be null")
-    @Column("visit_date")
-    private LocalDate visitDate;
+    @Column("start")
+    private ZonedDateTime start;
+
+    @NotNull(message = "must not be null")
+    @Column("end")
+    private ZonedDateTime end;
 
     @NotNull(message = "must not be null")
     @Column("pet_id")
@@ -51,17 +55,30 @@ public class Visit implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getVisitDate() {
-        return this.visitDate;
+    public ZonedDateTime getStart() {
+        return this.start;
     }
 
-    public Visit visitDate(LocalDate visitDate) {
-        this.setVisitDate(visitDate);
+    public Visit start(ZonedDateTime start) {
+        this.setStart(start);
         return this;
     }
 
-    public void setVisitDate(LocalDate visitDate) {
-        this.visitDate = visitDate;
+    public void setStart(ZonedDateTime start) {
+        this.start = start;
+    }
+
+    public ZonedDateTime getEnd() {
+        return this.end;
+    }
+
+    public Visit end(ZonedDateTime end) {
+        this.setEnd(end);
+        return this;
+    }
+
+    public void setEnd(ZonedDateTime end) {
+        this.end = end;
     }
 
     public Long getPetId() {
@@ -127,7 +144,8 @@ public class Visit implements Serializable {
     public String toString() {
         return "Visit{" +
             "id=" + getId() +
-            ", visitDate='" + getVisitDate() + "'" +
+            ", start='" + getStart() + "'" +
+            ", end='" + getEnd() + "'" +
             ", petId=" + getPetId() +
             ", vetId=" + getVetId() +
             ", description='" + getDescription() + "'" +

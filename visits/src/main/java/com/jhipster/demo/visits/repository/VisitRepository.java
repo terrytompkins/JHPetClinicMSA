@@ -15,8 +15,6 @@ import reactor.core.publisher.Mono;
 @SuppressWarnings("unused")
 @Repository
 public interface VisitRepository extends ReactiveCrudRepository<Visit, Long>, VisitRepositoryInternal {
-    Flux<Visit> findAllBy(Pageable pageable);
-
     @Override
     <S extends Visit> Mono<S> save(S entity);
 

@@ -11,14 +11,16 @@ application {
     packageName com.jhipster.demo.visits
     serviceDiscoveryType eureka
     authenticationType jwt
+    databaseType sql
     prodDatabaseType mysql
+    devDatabaseType h2Disk
     cacheProvider no
     buildTool maven
     clientFramework react
     testFrameworks [cypress]
     reactive false
   }
-  entities *
+  entities Visit, Vet, Specialty, Pet, Species, Owner
 }
 
 application {
@@ -28,12 +30,14 @@ application {
     packageName com.jhipster.demo.vet
     serviceDiscoveryType eureka
     authenticationType jwt
+    databaseType sql
     prodDatabaseType mysql
+    devDatabaseType h2Disk
     buildTool maven
     serverPort 8081
     skipUserManagement true
   }
-  entities Vet, Specialty, Visit
+  entities Vet, Specialty
 }
 
 application {
@@ -43,25 +47,27 @@ application {
     packageName com.jhipster.demo.pet
     serviceDiscoveryType eureka
     authenticationType jwt
+    databaseType sql
     prodDatabaseType mysql
+    devDatabaseType h2Disk
     cacheProvider no
     buildTool maven
     serverPort 8082
     skipUserManagement true
   }
-  entities Pet, Species, Owner, Visit
+  entities Pet, Species, Owner
 }
 
 /* Entities for Visit Gateway */
 entity Visit(visits) {
-    visitDate LocalDate required
+    start ZonedDateTime required
+    end ZonedDateTime required
     petId Long required
     vetId Long required
     description String
 }
 
 service Visit with serviceImpl
-paginate Visit with pagination
 
 
 /* Entities for Pet Microservice */
@@ -93,9 +99,6 @@ relationship ManyToOne {
 service Species, Pet, Owner with serviceImpl
 paginate Species, Pet, Owner with pagination
 microservice Species, Pet, Owner with pet
-
-
-
 
 /* Entities for Vet Microservice */
 entity Specialty(specialties) {

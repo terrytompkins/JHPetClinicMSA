@@ -33,11 +33,17 @@ export const VisitDetail = () => {
           </dt>
           <dd>{visitEntity.id}</dd>
           <dt>
-            <span id="visitDate">
-              <Translate contentKey="visitsApp.visit.visitDate">Visit Date</Translate>
+            <span id="start">
+              <Translate contentKey="visitsApp.visit.start">Start</Translate>
             </span>
           </dt>
-          <dd>{visitEntity.visitDate ? <TextFormat value={visitEntity.visitDate} type="date" format={APP_LOCAL_DATE_FORMAT} /> : null}</dd>
+          <dd>{visitEntity.start ? <TextFormat value={visitEntity.start} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
+          <dt>
+            <span id="end">
+              <Translate contentKey="visitsApp.visit.end">End</Translate>
+            </span>
+          </dt>
+          <dd>{visitEntity.end ? <TextFormat value={visitEntity.end} type="date" format={APP_DATE_FORMAT} /> : null}</dd>
           <dt>
             <span id="petId">
               <Translate contentKey="visitsApp.visit.petId">Pet Id</Translate>

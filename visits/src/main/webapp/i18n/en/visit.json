@@ -18,7 +18,8 @@
         "title": "Visit"
       },
       "id": "ID",
-      "visitDate": "Visit Date",
+      "start": "Start",
+      "end": "End",
       "petId": "Pet Id",
       "vetId": "Vet Id",
       "description": "Description"
