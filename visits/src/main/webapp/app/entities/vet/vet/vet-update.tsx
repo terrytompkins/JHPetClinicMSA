@@ -73,8 +73,8 @@ export const VetUpdate = () => {
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="visitsApp.petVet.home.createOrEditLabel" data-cy="VetCreateUpdateHeading">
-            <Translate contentKey="visitsApp.petVet.home.createOrEditLabel">Create or edit a Vet</Translate>
+          <h2 id="visitsApp.vetVet.home.createOrEditLabel" data-cy="VetCreateUpdateHeading">
+            <Translate contentKey="visitsApp.vetVet.home.createOrEditLabel">Create or edit a Vet</Translate>
           </h2>
         </Col>
       </Row>
@@ -95,7 +95,7 @@ export const VetUpdate = () => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('visitsApp.petVet.firstName')}
+                label={translate('visitsApp.vetVet.firstName')}
                 id="vet-firstName"
                 name="firstName"
                 data-cy="firstName"
@@ -106,7 +106,7 @@ export const VetUpdate = () => {
                 }}
               />
               <ValidatedField
-                label={translate('visitsApp.petVet.lastName')}
+                label={translate('visitsApp.vetVet.lastName')}
                 id="vet-lastName"
                 name="lastName"
                 data-cy="lastName"
@@ -117,7 +117,7 @@ export const VetUpdate = () => {
                 }}
               />
               <ValidatedField
-                label={translate('visitsApp.petVet.specialties')}
+                label={translate('visitsApp.vetVet.specialties')}
                 id="vet-specialties"
                 data-cy="specialties"
                 type="select"

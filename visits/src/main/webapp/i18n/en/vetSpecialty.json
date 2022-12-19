@@ -1,6 +1,6 @@
 {
   "visitsApp": {
-    "petSpecialty": {
+    "vetSpecialty": {
       "home": {
         "title": "Specialties",
         "refreshListLabel": "Refresh list",
@@ -19,8 +19,8 @@
       "vets": "Vets"
     }
   },
-  "petApp": {
-    "petSpecialty": {
+  "vetApp": {
+    "vetSpecialty": {
       "created": "A new Specialty is created with identifier {{ param }}",
       "updated": "A Specialty is updated with identifier {{ param }}",
       "deleted": "A Specialty is deleted with identifier {{ param }}"

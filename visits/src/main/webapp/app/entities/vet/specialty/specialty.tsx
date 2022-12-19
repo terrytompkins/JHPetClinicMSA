@@ -84,16 +84,16 @@ export const Specialty = () => {
   return (
     <div>
       <h2 id="specialty-heading" data-cy="SpecialtyHeading">
-        <Translate contentKey="visitsApp.petSpecialty.home.title">Specialties</Translate>
+        <Translate contentKey="visitsApp.vetSpecialty.home.title">Specialties</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="visitsApp.petSpecialty.home.refreshListLabel">Refresh List</Translate>
+            <Translate contentKey="visitsApp.vetSpecialty.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to="/specialty/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
-            <Translate contentKey="visitsApp.petSpecialty.home.createLabel">Create new Specialty</Translate>
+            <Translate contentKey="visitsApp.vetSpecialty.home.createLabel">Create new Specialty</Translate>
           </Link>
         </div>
       </h2>
@@ -103,10 +103,10 @@ export const Specialty = () => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="visitsApp.petSpecialty.id">ID</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="visitsApp.vetSpecialty.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('name')}>
-                  <Translate contentKey="visitsApp.petSpecialty.name">Name</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="visitsApp.vetSpecialty.name">Name</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -161,7 +161,7 @@ export const Specialty = () => {
         ) : (
           !loading && (
             <div className="alert alert-warning">
-              <Translate contentKey="visitsApp.petSpecialty.home.notFound">No Specialties found</Translate>
+              <Translate contentKey="visitsApp.vetSpecialty.home.notFound">No Specialties found</Translate>
             </div>
           )
         )}

@@ -17,7 +17,7 @@
     "enableHibernateCache": true,
     "enableSwaggerCodegen": false,
     "enableTranslation": true,
-    "entities": [],
+    "entities": ["Specialty", "Vet"],
     "entitySuffix": "",
     "gradleEnterpriseHost": "",
     "jhiPrefix": "jhi",

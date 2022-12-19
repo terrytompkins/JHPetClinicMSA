@@ -10,9 +10,9 @@
         "petSpecies": "Species",
         "visit": "Visit",
         "petOwner": "Owner",
-        "petSpecialty": "Specialty",
+        "vetSpecialty": "Specialty",
         "petPet": "Pet",
-        "petVet": "Vet",
+        "vetVet": "Vet",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

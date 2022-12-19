@@ -8,6 +8,13 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
+import { IPet } from 'app/shared/model/pet/pet.model';
+import { getEntities as getPets } from 'app/entities/pet/pet/pet.reducer';
+
+import { IVet } from 'app/shared/model/vet/vet.model';
+import { getEntities as getVets } from 'app/entities/vet/vet/vet.reducer';
+
+
 import { IVisit } from 'app/shared/model/visit.model';
 import { getEntity, updateEntity, createEntity, reset } from './visit.reducer';
 
@@ -20,6 +27,9 @@ export const VisitUpdate = () => {
   const [ query ] = useSearchParams();
   
   const isNew = id === undefined;
+
+  const pets = useAppSelector(state => state.visits.pet.entities);
+  const vets = useAppSelector(state => state.visits.vet.entities);
 
   const visitEntity = useAppSelector(state => state.visits.visit.entity);
   const loading = useAppSelector(state => state.visits.visit.loading);
@@ -36,6 +46,9 @@ export const VisitUpdate = () => {
     } else {
       dispatch(getEntity(id));
     }
+
+    dispatch(getPets({}));
+    dispatch(getVets({}));
   }, []);
 
   useEffect(() => {
@@ -120,28 +133,26 @@ export const VisitUpdate = () => {
                   required: { value: true, message: translate('entity.validation.required') },
                 }}
               />
-              <ValidatedField
-                label={translate('visitsApp.visit.petId')}
-                id="visit-petId"
-                name="petId"
-                data-cy="petId"
-                type="text"
-                validate={{
-                  required: { value: true, message: translate('entity.validation.required') },
-                  validate: v => isNumber(v) || translate('entity.validation.number'),
-                }}
-              />
-              <ValidatedField
-                label={translate('visitsApp.visit.vetId')}
-                id="visit-vetId"
-                name="vetId"
-                data-cy="vetId"
-                type="text"
-                validate={{
-                  required: { value: true, message: translate('entity.validation.required') },
-                  validate: v => isNumber(v) || translate('entity.validation.number'),
-                }}
-              />
+              <ValidatedField id="visit-petId" name="petId" data-cy="petId" label={translate('visitsApp.visit.petId')} type="select">
+                <option value="" key="0" />
+                {pets
+                  ? pets.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.name}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField id="visit-vetId" name="vetId" data-cy="vetId" label={translate('visitsApp.visit.vetId')} type="select">
+                <option value="" key="0" />
+                {vets
+                  ? vets.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.lastName}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
               <ValidatedField
                 label={translate('visitsApp.visit.description')}
                 id="visit-description"

@@ -1,13 +1,10 @@
 package com.jhipster.demo.visits.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.web.reactive.ResourceHandlerRegistrationCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
@@ -25,7 +22,6 @@ import org.zalando.problem.spring.webflux.advice.ProblemHandling;
 import tech.jhipster.config.JHipsterConstants;
 import tech.jhipster.config.JHipsterProperties;
 import tech.jhipster.config.h2.H2ConfigurationHelper;
-import tech.jhipster.web.filter.reactive.CachingHttpHeadersFilter;
 
 /**
  * Configuration of web application with Servlet 3.0 APIs.
@@ -82,18 +78,5 @@ public class WebConfigurer implements WebFluxConfigurer {
     @Order(-2) // The handler must have precedence over WebFluxResponseStatusExceptionHandler and Spring Boot's ErrorWebExceptionHandler
     public WebExceptionHandler problemExceptionHandler(ObjectMapper mapper, ProblemHandling problemHandling) {
         return new ProblemExceptionHandler(mapper, problemHandling);
-    }
-
-    @Bean
-    ResourceHandlerRegistrationCustomizer registrationCustomizer() {
-        // Disable built-in cache control to use our custom filter instead
-        return registration -> registration.setCacheControl(null);
-    }
-
-    @Bean
-    @Profile(JHipsterConstants.SPRING_PROFILE_PRODUCTION)
-    public CachingHttpHeadersFilter cachingHttpHeadersFilter() {
-        // Use a cache filter that only match selected paths
-        return new CachingHttpHeadersFilter(TimeUnit.DAYS.toMillis(jHipsterProperties.getHttp().getCache().getTimeToLiveInDays()));
     }
 }

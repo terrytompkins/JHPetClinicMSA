@@ -23,7 +23,7 @@ export const SpecialtyDetail = () => {
     <Row>
       <Col md="8">
         <h2 data-cy="specialtyDetailsHeading">
-          <Translate contentKey="visitsApp.petSpecialty.detail.title">Specialty</Translate>
+          <Translate contentKey="visitsApp.vetSpecialty.detail.title">Specialty</Translate>
         </h2>
         <dl className="jh-entity-details">
           <dt>
@@ -34,7 +34,7 @@ export const SpecialtyDetail = () => {
           <dd>{specialtyEntity.id}</dd>
           <dt>
             <span id="name">
-              <Translate contentKey="visitsApp.petSpecialty.name">Name</Translate>
+              <Translate contentKey="visitsApp.vetSpecialty.name">Name</Translate>
             </span>
           </dt>
           <dd>{specialtyEntity.name}</dd>

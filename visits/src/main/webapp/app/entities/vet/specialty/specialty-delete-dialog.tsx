@@ -44,8 +44,8 @@ export const SpecialtyDeleteDialog = () => {
       <ModalHeader toggle={handleClose} data-cy="specialtyDeleteDialogHeading">
         <Translate contentKey="entity.delete.title">Confirm delete operation</Translate>
       </ModalHeader>
-      <ModalBody id="visitsApp.petSpecialty.delete.question">
-        <Translate contentKey="visitsApp.petSpecialty.delete.question" interpolate={{ id: specialtyEntity.id }}>
+      <ModalBody id="visitsApp.vetSpecialty.delete.question">
+        <Translate contentKey="visitsApp.vetSpecialty.delete.question" interpolate={{ id: specialtyEntity.id }}>
           Are you sure you want to delete this Specialty?
         </Translate>
       </ModalBody>

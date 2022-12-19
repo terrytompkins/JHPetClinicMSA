@@ -1,0 +1,34 @@
+{
+  "applications": ["visits", "vet"],
+  "changelogDate": "20221218184231",
+  "clientRootFolder": "vet",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "specialties",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "80"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "vet",
+  "name": "Specialty",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "vet",
+      "otherEntityRelationshipName": "specialties",
+      "ownerSide": false,
+      "relationshipName": "vets",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl",
+  "skipClient": true
+}

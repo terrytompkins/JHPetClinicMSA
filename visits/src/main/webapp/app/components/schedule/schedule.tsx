@@ -2,8 +2,10 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Calendar, luxonLocalizer, Views, Event, SlotInfo } from 'react-big-calendar';
 import { DateTime } from 'luxon';
 import getStore, { useAppDispatch, useAppSelector } from 'app/config/store';
-import { getEntities } from 'app/entities/visit/visit.reducer';
+import { getEntities as getVisitEntities } from 'app/entities/visit/visit.reducer';
+import { getEntities as getVetEntities } from 'app/entities/vet/vet/vet.reducer';
 import { IVisit } from 'app/shared/model/visit.model';
+import { IVet } from '../../shared/model/vet/vet.model';
 
 import './schedule.scss';
 import entitiesReducers from '../../entities/reducers';
@@ -20,23 +22,15 @@ const Schedule = () => {
 	const store = getStore();
   	store.injectReducer('visits', combineReducers(entitiesReducers as ReducersMapObject));
 	const dispatch = useAppDispatch();
+
 	const localizer = luxonLocalizer(DateTime);
 	const visitList: Array<IVisit> = useAppSelector(state => state.visits.visit.entities);
+	const vetList: Array<IVet> = useAppSelector(state => state.visits.vet.entities);
 
 	useEffect(() => {
-		dispatch(getEntities({}));
+		dispatch(getVetEntities({}));
+		dispatch(getVisitEntities({}));
 	}, []);
-
-	const vetList = [{
-		id: 1,
-		lastName: 'Tompkins'
-	}, {
-		id: 2,
-		lastName: 'Smith'
-	}, {
-		id: 3,
-		lastName: 'White'
-	}];
 
 	const events = useMemo(() => visitList.map<Event>(visit => {
 		return {

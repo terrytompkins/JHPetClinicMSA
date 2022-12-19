@@ -23,7 +23,7 @@ export const VetDetail = () => {
     <Row>
       <Col md="8">
         <h2 data-cy="vetDetailsHeading">
-          <Translate contentKey="visitsApp.petVet.detail.title">Vet</Translate>
+          <Translate contentKey="visitsApp.vetVet.detail.title">Vet</Translate>
         </h2>
         <dl className="jh-entity-details">
           <dt>
@@ -34,18 +34,18 @@ export const VetDetail = () => {
           <dd>{vetEntity.id}</dd>
           <dt>
             <span id="firstName">
-              <Translate contentKey="visitsApp.petVet.firstName">First Name</Translate>
+              <Translate contentKey="visitsApp.vetVet.firstName">First Name</Translate>
             </span>
           </dt>
           <dd>{vetEntity.firstName}</dd>
           <dt>
             <span id="lastName">
-              <Translate contentKey="visitsApp.petVet.lastName">Last Name</Translate>
+              <Translate contentKey="visitsApp.vetVet.lastName">Last Name</Translate>
             </span>
           </dt>
           <dd>{vetEntity.lastName}</dd>
           <dt>
-            <Translate contentKey="visitsApp.petVet.specialties">Specialties</Translate>
+            <Translate contentKey="visitsApp.vetVet.specialties">Specialties</Translate>
           </dt>
           <dd>
             {vetEntity.specialties

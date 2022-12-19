@@ -5,7 +5,6 @@ import static org.springframework.security.web.server.util.matcher.ServerWebExch
 import com.jhipster.demo.visits.security.AuthoritiesConstants;
 import com.jhipster.demo.visits.security.jwt.JWTFilter;
 import com.jhipster.demo.visits.security.jwt.TokenProvider;
-import com.jhipster.demo.visits.web.filter.SpaWebFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
@@ -80,7 +79,6 @@ public class SecurityConfiguration {
             .csrf()
                 .disable()
             .addFilterBefore(corsWebFilter, SecurityWebFiltersOrder.REACTOR_CONTEXT)
-            .addFilterAt(new SpaWebFilter(), SecurityWebFiltersOrder.AUTHENTICATION)
             .addFilterAt(new JWTFilter(tokenProvider), SecurityWebFiltersOrder.HTTP_BASIC)
             .authenticationManager(reactiveAuthenticationManager())
             .exceptionHandling()
@@ -97,8 +95,6 @@ public class SecurityConfiguration {
                 .frameOptions().mode(Mode.DENY)
         .and()
             .authorizeExchange()
-            .pathMatchers("/").permitAll()
-            .pathMatchers("/*.*").permitAll()
             .pathMatchers("/api/authenticate").permitAll()
             .pathMatchers("/api/register").permitAll()
             .pathMatchers("/api/activate").permitAll()

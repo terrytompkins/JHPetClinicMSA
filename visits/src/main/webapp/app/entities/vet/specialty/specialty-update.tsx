@@ -71,8 +71,8 @@ export const SpecialtyUpdate = () => {
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="visitsApp.petSpecialty.home.createOrEditLabel" data-cy="SpecialtyCreateUpdateHeading">
-            <Translate contentKey="visitsApp.petSpecialty.home.createOrEditLabel">Create or edit a Specialty</Translate>
+          <h2 id="visitsApp.vetSpecialty.home.createOrEditLabel" data-cy="SpecialtyCreateUpdateHeading">
+            <Translate contentKey="visitsApp.vetSpecialty.home.createOrEditLabel">Create or edit a Specialty</Translate>
           </h2>
         </Col>
       </Row>
@@ -93,7 +93,7 @@ export const SpecialtyUpdate = () => {
                 />
               ) : null}
               <ValidatedField
-                label={translate('visitsApp.petSpecialty.name')}
+                label={translate('visitsApp.vetSpecialty.name')}
                 id="specialty-name"
                 name="name"
                 data-cy="name"

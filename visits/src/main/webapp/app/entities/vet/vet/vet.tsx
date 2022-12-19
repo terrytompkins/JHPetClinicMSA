@@ -84,16 +84,16 @@ export const Vet = () => {
   return (
     <div>
       <h2 id="vet-heading" data-cy="VetHeading">
-        <Translate contentKey="visitsApp.petVet.home.title">Vets</Translate>
+        <Translate contentKey="visitsApp.vetVet.home.title">Vets</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} />{' '}
-            <Translate contentKey="visitsApp.petVet.home.refreshListLabel">Refresh List</Translate>
+            <Translate contentKey="visitsApp.vetVet.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to="/vet/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
-            <Translate contentKey="visitsApp.petVet.home.createLabel">Create new Vet</Translate>
+            <Translate contentKey="visitsApp.vetVet.home.createLabel">Create new Vet</Translate>
           </Link>
         </div>
       </h2>
@@ -103,13 +103,13 @@ export const Vet = () => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  <Translate contentKey="visitsApp.petVet.id">ID</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="visitsApp.vetVet.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('firstName')}>
-                  <Translate contentKey="visitsApp.petVet.firstName">First Name</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="visitsApp.vetVet.firstName">First Name</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('lastName')}>
-                  <Translate contentKey="visitsApp.petVet.lastName">Last Name</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="visitsApp.vetVet.lastName">Last Name</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -165,7 +165,7 @@ export const Vet = () => {
         ) : (
           !loading && (
             <div className="alert alert-warning">
-              <Translate contentKey="visitsApp.petVet.home.notFound">No Vets found</Translate>
+              <Translate contentKey="visitsApp.vetVet.home.notFound">No Vets found</Translate>
             </div>
           )
         )}
