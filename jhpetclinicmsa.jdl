@@ -108,4 +108,4 @@ relationship ManyToMany{
 
 service Vet, Specialty with serviceImpl
 paginate Vet, Specialty with pagination
-microservice Vet, Specialty with pet
+microservice Vet, Specialty with vet

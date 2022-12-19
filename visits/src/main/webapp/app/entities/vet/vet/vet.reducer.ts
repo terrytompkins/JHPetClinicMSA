@@ -3,7 +3,7 @@ import { createAsyncThunk, isFulfilled, isPending, isRejected } from '@reduxjs/t
 
 import { cleanEntity } from 'app/shared/util/entity-utils';
 import { IQueryParams, createEntitySlice, EntityState, serializeAxiosError } from 'app/shared/reducers/reducer.utils';
-import { IVet, defaultValue } from 'app/shared/model/pet/vet.model';
+import { IVet, defaultValue } from 'app/shared/model/vet/vet.model';
 
 const initialState: EntityState<IVet> = {
   loading: false,
@@ -15,7 +15,7 @@ const initialState: EntityState<IVet> = {
   updateSuccess: false,
 };
 
-const apiUrl = 'services/pet/api/vets';
+const apiUrl = 'services/vet/api/vets';
 
 // Actions
 

@@ -1,4 +1,4 @@
-import { ISpecialty } from 'app/shared/model/pet/specialty.model';
+import { ISpecialty } from 'app/shared/model/vet/specialty.model';
 
 export interface IVet {
   id?: number;

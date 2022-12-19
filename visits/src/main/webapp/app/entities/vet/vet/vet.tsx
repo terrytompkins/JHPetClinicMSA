@@ -9,7 +9,7 @@ import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/shared/util/pagination.cons
 import { overridePaginationStateWithQueryParams } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-import { IVet } from 'app/shared/model/pet/vet.model';
+import { IVet } from 'app/shared/model/vet/vet.model';
 import { getEntities } from './vet.reducer';
 
 export const Vet = () => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,6 +17,8 @@ export const VisitUpdate = () => {
   const navigate = useNavigate();
 
   const { id } = useParams<'id'>();
+  const [ query ] = useSearchParams();
+  
   const isNew = id === undefined;
 
   const visitEntity = useAppSelector(state => state.visits.visit.entity);
@@ -61,8 +63,9 @@ export const VisitUpdate = () => {
   const defaultValues = () =>
     isNew
       ? {
-          startTime: displayDefaultDateTime(),
-          endTime: displayDefaultDateTime(),
+          startTime: query.get('start') ? convertDateTimeFromServer(query.get('start')) : displayDefaultDateTime(),
+          endTime: query.get('end') ? convertDateTimeFromServer(query.get('end')) : displayDefaultDateTime(),
+          vetId: query.get('vetId')
         }
       : {
           ...visitEntity,

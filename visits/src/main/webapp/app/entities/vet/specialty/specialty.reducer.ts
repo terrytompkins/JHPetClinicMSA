@@ -3,7 +3,7 @@ import { createAsyncThunk, isFulfilled, isPending, isRejected } from '@reduxjs/t
 
 import { cleanEntity } from 'app/shared/util/entity-utils';
 import { IQueryParams, createEntitySlice, EntityState, serializeAxiosError } from 'app/shared/reducers/reducer.utils';
-import { ISpecialty, defaultValue } from 'app/shared/model/pet/specialty.model';
+import { ISpecialty, defaultValue } from 'app/shared/model/vet/specialty.model';
 
 const initialState: EntityState<ISpecialty> = {
   loading: false,
@@ -15,7 +15,7 @@ const initialState: EntityState<ISpecialty> = {
   updateSuccess: false,
 };
 
-const apiUrl = 'services/pet/api/specialties';
+const apiUrl = 'services/vet/api/specialties';
 
 // Actions
 

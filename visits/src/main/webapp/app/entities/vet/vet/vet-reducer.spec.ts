@@ -6,7 +6,7 @@ import sinon from 'sinon';
 
 import reducer, { createEntity, deleteEntity, getEntities, getEntity, updateEntity, partialUpdateEntity, reset } from './vet.reducer';
 import { EntityState } from 'app/shared/reducers/reducer.utils';
-import { IVet, defaultValue } from 'app/shared/model/pet/vet.model';
+import { IVet, defaultValue } from 'app/shared/model/vet/vet.model';
 
 describe('Entities reducer tests', () => {
   function isEmpty(element): boolean {

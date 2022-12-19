@@ -12,9 +12,9 @@ import entitiesReducers from './reducers';
 import Species from './pet/species';
 import Visit from './visit';
 import Owner from './pet/owner';
-import Specialty from './pet/specialty';
+import Specialty from './vet/specialty';
 import Pet from './pet/pet';
-import Vet from './pet/vet';
+import Vet from './vet/vet';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 export default () => {

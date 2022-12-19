@@ -9,7 +9,7 @@ import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/shared/util/pagination.cons
 import { overridePaginationStateWithQueryParams } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-import { ISpecialty } from 'app/shared/model/pet/specialty.model';
+import { ISpecialty } from 'app/shared/model/vet/specialty.model';
 import { getEntities } from './specialty.reducer';
 
 export const Specialty = () => {

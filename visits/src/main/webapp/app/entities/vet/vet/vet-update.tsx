@@ -8,9 +8,9 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-import { ISpecialty } from 'app/shared/model/pet/specialty.model';
-import { getEntities as getSpecialties } from 'app/entities/pet/specialty/specialty.reducer';
-import { IVet } from 'app/shared/model/pet/vet.model';
+import { ISpecialty } from 'app/shared/model/vet/specialty.model';
+import { getEntities as getSpecialties } from 'app/entities/vet/specialty/specialty.reducer';
+import { IVet } from 'app/shared/model/vet/vet.model';
 import { getEntity, updateEntity, createEntity, reset } from './vet.reducer';
 
 export const VetUpdate = () => {
