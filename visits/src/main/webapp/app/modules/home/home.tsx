@@ -4,7 +4,7 @@ import React, { Fragment } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { Translate } from 'react-jhipster';
-import { Row, Col, Alert } from 'reactstrap';
+import { Row, Col, Button } from 'reactstrap';
 
 import { useAppSelector } from 'app/config/store';
 
@@ -18,38 +18,27 @@ export const Home = () => {
       <Helmet>
         <title>PetClinic - Home</title>
       </Helmet>
-      <Row>
-        <Col md="12">
-          <h2>
-            <Translate contentKey="home.title">Welcome, Java Hipster!</Translate>
-          </h2>
-          {account?.login ? (
-            <Schedule />
-          ) : (
-            <div>
-              <Alert color="warning">
-                <Translate contentKey="global.messages.info.authenticated.prefix">If you want to </Translate>
-
-                <Link to="/login" className="alert-link">
-                  <Translate contentKey="global.messages.info.authenticated.link"> sign in</Translate>
-                </Link>
-                <Translate contentKey="global.messages.info.authenticated.suffix">
-                  , you can try the default accounts:
-                  <br />- Administrator (login=&quot;admin&quot; and password=&quot;admin&quot;)
-                  <br />- User (login=&quot;user&quot; and password=&quot;user&quot;).
-                </Translate>
-              </Alert>
-
-              <Alert color="warning">
-                <Translate contentKey="global.messages.info.register.noaccount">You do not have an account yet?</Translate>&nbsp;
-                <Link to="/account/register" className="alert-link">
-                  <Translate contentKey="global.messages.info.register.link">Register a new account</Translate>
-                </Link>
-              </Alert>
-            </div>
-          )}
-        </Col>
-      </Row>
+        {account?.login ? (
+          <Schedule />
+        ) : (
+          <Row>
+            <Col>
+              <div className="welcome">
+                <h2>
+                  <Translate contentKey="home.title">Welcome to JHipster PetClinic!</Translate>
+                </h2>
+                <img className="pets" src='../../../content/images/pets.png' />
+                <p>
+                  <Link to="/login" className="alert-link">
+                    <Button color="primary" size="lg">
+                      <Translate contentKey="global.messages.info.authenticated.link">Sign in</Translate>
+                    </Button>
+                  </Link>
+                </p>
+              </div>
+            </Col>
+          </Row>
+        )}
     </Fragment>
   );
 };
