@@ -5,17 +5,24 @@ import getStore, { useAppDispatch, useAppSelector } from 'app/config/store';
 import { getEntities as getVisitEntities } from 'app/entities/visit/visit.reducer';
 import { getEntities as getVetEntities } from 'app/entities/vet/vet/vet.reducer';
 import { IVisit } from 'app/shared/model/visit.model';
-import { IVet } from '../../shared/model/vet/vet.model';
+import { IVet } from 'app/shared/model/vet/vet.model';
 
 import './schedule.scss';
-import entitiesReducers from '../../entities/reducers';
+import entitiesReducers from 'app/entities/reducers';
 import { combineReducers, ReducersMapObject } from 'redux';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
-import VisitUpdate from '../../entities/visit/visit-update';
 import { useNavigate } from 'react-router-dom';
 
+import { VisitDetail } from 'app/entities/visit/visit-detail';
+
+interface VisitEvent extends Event {
+	id: number;
+}
+
+
 const Schedule = () => {
-	const [showAdd, setShowAdd] = useState(false);
+	const [showEvent, setShowEvent] = useState(false);
+	const [selectedEvent, setSelectedEvent] = useState(undefined);
 	
 	const navigate = useNavigate();
 	
@@ -32,8 +39,9 @@ const Schedule = () => {
 		dispatch(getVisitEntities({}));
 	}, []);
 
-	const events = useMemo(() => visitList.map<Event>(visit => {
+	const events = useMemo(() => visitList.map<VisitEvent>(visit => {
 		return {
+			id: visit.id,
 			title: visit.description,
 			start: new Date(visit.startTime),
 			end: new Date(visit.endTime),
@@ -45,9 +53,13 @@ const Schedule = () => {
 		navigate(`/visit/new?vetId=${slot.resourceId}&start=${slot.start.toISOString()}&end=${slot.end.toISOString()}`);
 	};
 
+	const viewEvent = (event: VisitEvent) => {
+		setSelectedEvent(event.id);
+		setShowEvent(true);
+	}
+
 	return (visitList && visitList.length > 0) ? 
 		(
-
 			<div className="schedule-container">
 				<Calendar 
 					localizer={localizer}
@@ -63,10 +75,12 @@ const Schedule = () => {
 					max={new Date(1972, 0, 1, 20, 0, 0)}
 					selectable={true}
 					onSelectSlot={scheduleNewVisit}
+					onSelectEvent={viewEvent}
 				/>
-				<Modal isOpen={showAdd} toggle={() => setShowAdd(!showAdd)}>
+				<Modal isOpen={showEvent} toggle={() => setShowEvent(!showEvent)}>
 					<ModalHeader>Schedule a New Visit</ModalHeader>
 					<ModalBody>
+						{selectedEvent && <VisitDetail id={selectedEvent} />}
 					</ModalBody>
 				</Modal>
 			</div>

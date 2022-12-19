@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { IPet } from 'app/shared/model/pet/pet.model';
 import { getEntities as getPets } from 'app/entities/pet/pet/pet.reducer';
+import { getEntity as getOwner } from 'app/entities/pet/owner/owner.reducer';
 
 import { IVet } from 'app/shared/model/vet/vet.model';
 import { getEntities as getVets } from 'app/entities/vet/vet/vet.reducer';
@@ -17,6 +18,7 @@ import { getEntities as getVets } from 'app/entities/vet/vet/vet.reducer';
 
 import { IVisit } from 'app/shared/model/visit.model';
 import { getEntity, updateEntity, createEntity, reset } from './visit.reducer';
+import { IOwner } from '../../shared/model/pet/owner.model';
 
 export const VisitUpdate = () => {
   const dispatch = useAppDispatch();
@@ -28,8 +30,8 @@ export const VisitUpdate = () => {
   
   const isNew = id === undefined;
 
-  const pets = useAppSelector(state => state.visits.pet.entities);
-  const vets = useAppSelector(state => state.visits.vet.entities);
+  const pets: Array<IPet> = useAppSelector(state => state.visits.pet.entities);
+  const vets: Array<IVet> = useAppSelector(state => state.visits.vet.entities);
 
   const visitEntity = useAppSelector(state => state.visits.visit.entity);
   const loading = useAppSelector(state => state.visits.visit.loading);
@@ -61,9 +63,15 @@ export const VisitUpdate = () => {
     values.startTime = convertDateTimeToServer(values.startTime);
     values.endTime = convertDateTimeToServer(values.endTime);
 
+    const selectedPet = pets.find(p => p.id === parseInt(values.petId));
+    const selectedVet = vets.find(v => v.id === parseInt(values.vetId));
+
+    const description = `${selectedPet.name} ${selectedPet.owner.lastName} with Dr. ${selectedVet.lastName}`
+
     const entity = {
       ...visitEntity,
       ...values,
+      description
     };
 
     if (isNew) {
@@ -153,13 +161,6 @@ export const VisitUpdate = () => {
                     ))
                   : null}
               </ValidatedField>
-              <ValidatedField
-                label={translate('visitsApp.visit.description')}
-                id="visit-description"
-                name="description"
-                data-cy="description"
-                type="text"
-              />
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/visit" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
